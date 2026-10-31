@@ -1,3 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Add the final live website URL here after hosting assigns it. -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://krishnaenterprise.github.io/Krishna_enterprise_services_website/</loc>
+  </url>
+</urlset>
