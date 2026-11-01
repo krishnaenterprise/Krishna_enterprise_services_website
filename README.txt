@@ -28,3 +28,10 @@ Instagram: @krishnaentrerprise_services
 New services: Website Builder; Poster & Banner Making.
 SEO: description, robots meta, Open Graph tags, robots.txt added.
 IMPORTANT: Generate the sitemap URL entry after the hosting provider assigns the final public URL.
+
+
+Image speed optimization:
+- Visible logo and office photo now use smaller WebP versions.
+- Original PNG/JPG files are retained unchanged as a backup.
+- The PNG logo remains available for favicon and social preview metadata.
+- Website URL, page content, styles, scripts, and other assets were not changed.
