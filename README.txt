@@ -23,7 +23,7 @@ IMPORTANT PERSONALIZATION
 
 Updated contact details:
 Email: krishnaenterpriseandservices@gmail.com
-Instagram: @krishnaentrerprise_services
+
 
 New services: Website Builder; Poster & Banner Making.
 SEO: description, robots meta, Open Graph tags, robots.txt added.
