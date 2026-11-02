@@ -35,3 +35,18 @@ Image speed optimization:
 - Original PNG/JPG files are retained unchanged as a backup.
 - The PNG logo remains available for favicon and social preview metadata.
 - Website URL, page content, styles, scripts, and other assets were not changed.
+
+
+SEO FIX NOTES
+=============
+- sitemap.xml now contains the exact live GitHub Pages homepage URL.
+- robots.txt includes the absolute sitemap location.
+- index.html includes a canonical URL, improved title/description, social metadata,
+  and LocalBusiness structured data.
+- Existing website URL, visual layout, CSS, JavaScript, and image assets are preserved.
+
+IMPORTANT FOR GITHUB PAGES
+- Keep the repository's existing published file/folder structure.
+- Replace the corresponding index.html, robots.txt, and sitemap.xml in the
+  same published location; do not create a nested extra website folder.
+- Do not change the repository name, Pages settings, or public website URL.
