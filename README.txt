@@ -24,7 +24,6 @@ IMPORTANT PERSONALIZATION
 Updated contact details:
 Email: krishnaenterpriseandservices@gmail.com
 
-
 New services: Website Builder; Poster & Banner Making.
 SEO: description, robots meta, Open Graph tags, robots.txt added.
 IMPORTANT: Generate the sitemap URL entry after the hosting provider assigns the final public URL.
@@ -50,3 +49,5 @@ IMPORTANT FOR GITHUB PAGES
 - Replace the corresponding index.html, robots.txt, and sitemap.xml in the
   same published location; do not create a nested extra website folder.
 - Do not change the repository name, Pages settings, or public website URL.
+
+Website update: Social account links removed. The top service highlights now show RTO, Documentation, Property, Website Builder, and Poster & Banner Making.

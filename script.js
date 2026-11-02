@@ -43,7 +43,7 @@ const web = [
 const design = [
  ['Poster Design','Promotional and offer posters','file'],
  ['Banner Design','Business and event banners','chart'],
- ['Social Media Designs','Instagram and WhatsApp creatives','globe'],
+ ['Social Media Designs','WhatsApp and social media creatives','globe'],
  ['Visiting Card & Flyer','Business cards and promotional flyers','card']
 ];
 renderCards('rto-grid',rto); renderCards('docs-grid',docs); renderCards('property-grid',property);
