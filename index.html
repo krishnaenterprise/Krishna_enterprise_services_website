@@ -152,36 +152,43 @@
     </section>
 
 
-    <section class="quick-enquiry-section" id="quick-enquiry"><div class="container"><div class="quick-enquiry-card">
-          <h3>✉ Quick Enquiry</h3>
-          <p class="enquiry-intro">Fill in your details. WhatsApp will open with your enquiry ready to send.</p>
+    <section class="quick-enquiry-section" id="service-assistant">
+      <div class="container">
+        <div class="quick-enquiry-card service-assistant-card">
+          <div class="eyebrow dark"><span class="eyebrow-dot"></span> QUICK & EASY SERVICE REQUEST</div>
+          <h3>Service Assistant</h3>
+          <p class="enquiry-intro">Choose your service to see a helpful document checklist and an estimated assistance time. Tick the documents you already have, then send your enquiry on WhatsApp.</p>
           <form id="quick-enquiry-form">
             <label for="enquiry-name">Your Name *</label>
             <input id="enquiry-name" name="name" type="text" placeholder="Your full name" autocomplete="name" required>
-            <label for="enquiry-phone">Phone Number *</label>
-            <input id="enquiry-phone" name="phone" type="tel" inputmode="tel" placeholder="Your phone number" autocomplete="tel" required>
-            <label for="enquiry-service">Select Service *</label>
+            <label for="enquiry-phone">Your WhatsApp / Phone Number *</label>
+            <input id="enquiry-phone" name="phone" type="tel" inputmode="tel" placeholder="10-digit mobile number" autocomplete="tel" pattern="[0-9+()\- ]{10,18}" required>
+            <label for="enquiry-service">Select Your Service *</label>
             <select id="enquiry-service" name="service" required>
               <option value="">Choose a service</option>
-              <option>RTO & Vehicle Services</option>
-              <option>Driving Licence</option>
-              <option>Vehicle Registration / RC</option>
-              <option>Aadhaar Services</option>
-              <option>PAN Card</option>
-              <option>Voter ID Card</option>
-              <option>Passport Application</option>
-              <option>Certificates & Government Schemes</option>
-              <option>GST / Income Tax / Udyam</option>
-              <option>Property Services</option>
-              <option>Website Builder</option>
-              <option>Poster & Banner Making</option>
-              <option>Other Service</option>
+              <optgroup label="RTO Services">
+                <option>Learner’s Licence</option><option>Permanent Driving Licence</option><option>Driving Licence Renewal</option><option>Duplicate Driving Licence</option><option>Change Licence Details</option><option>International Driving Permit</option><option>Issue / Submit Licence NOC</option><option>Transfer Vehicle Ownership</option><option>Vehicle Services</option><option>Duplicate RC</option><option>RC Renewal</option><option>Change RC Address</option><option>Hypothecation Cancellation</option><option>Issue / Submit Vehicle NOC</option>
+              </optgroup>
+              <optgroup label="Documentation Services">
+                <option>Aadhaar Services</option><option>PAN Card</option><option>Voter ID Card</option><option>Passport Application</option><option>Caste Certificate</option><option>Income Certificate</option><option>Domicile Certificate</option><option>Birth / Death Certificate</option><option>Land Records</option><option>Ayushman Bharat Card</option><option>PM-Kisan</option><option>e-Shram / Labour Card</option><option>Pension Schemes</option><option>PM Awas Yojana / Ujjwala Yojana</option><option>GST Services</option><option>Income Tax Return</option><option>Udyam / MSME Registration</option>
+              </optgroup>
+              <optgroup label="Property Services"><option>Property Seller Assistance</option><option>Property Buyer Assistance</option><option>Landlord / Tenant Assistance</option><option>Property Advisory</option></optgroup>
+              <optgroup label="Website & Design"><option>Website Builder</option><option>Poster Design</option><option>Banner Design</option><option>Social Media Design</option><option>Visiting Card / Flyer</option></optgroup>
             </select>
-            <label for="enquiry-message">Your Message / Enquiry *</label>
-            <textarea id="enquiry-message" name="message" rows="4" placeholder="Tell us what assistance you need" required></textarea>
-            <button class="btn btn-enquiry" type="submit">➤ Send Enquiry (Open in WhatsApp)</button>
+            <div class="assistant-info" id="assistant-info" hidden>
+              <div class="assistant-time"><span>Estimated assistance time</span><strong id="assistant-time-value"></strong></div>
+              <p id="assistant-note"></p>
+              <div class="checklist-heading"><strong>Document / Information Checklist</strong><small>Tick what you currently have. We will guide you about anything missing.</small></div>
+              <div id="document-checklist" class="document-checklist"></div>
+            </div>
+            <label for="enquiry-message">Additional Details (Optional)</label>
+            <textarea id="enquiry-message" name="message" rows="3" placeholder="Tell us what you need help with, if anything else."></textarea>
+            <button class="btn btn-enquiry" type="submit">➤ Send Enquiry on WhatsApp</button>
           </form>
-        </div></div></section>
+          <p class="assistant-disclaimer">Important: Document requirements can vary by application and individual case. Time shown is only an estimated KES assistance time; government department / provider processing, approval and fees are separate and may vary. No approval or completion time is guaranteed.</p>
+        </div>
+      </div>
+    </section>
     <section class="contact-section" id="contact">
       <div class="container contact-card">
         <div class="contact-copy">

@@ -55,20 +55,106 @@ menuButton.addEventListener('click',()=>{const open=nav.classList.toggle('open')
 nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menuButton.setAttribute('aria-expanded','false');menuButton.textContent='☰';}));
 
 
-// Quick Enquiry form: validate details, then open WhatsApp with a ready-to-send message.
+// Service Assistant: show a relevant starter checklist and KES assistance estimate.
+const serviceSelect = document.getElementById('enquiry-service');
+const assistantInfo = document.getElementById('assistant-info');
+const checklistRoot = document.getElementById('document-checklist');
+const assistantTimes = {
+  aadhaar: ['24–48 hours (KES assistance estimate)', 'This is the estimated time for our assistance / initial handling only. UIDAI review, appointment availability and actual update time are outside our control.'],
+  rto: ['1–3 working days (KES assistance estimate)', 'RTO appointment availability, verification and department processing may take additional time.'],
+  documents: ['1–3 working days (KES assistance estimate)', 'The issuing department / portal may take additional time for verification and approval.'],
+  property: ['1–2 working days for initial assistance', 'Property searches, legal review, third-party responses and transaction timelines can vary.'],
+  website: ['3–7 working days (project estimate)', 'Final delivery depends on content, images, revisions and the agreed project scope.'],
+  design: ['1–2 working days (design estimate)', 'Timing depends on the content supplied and number of revisions.']
+};
+const checklists = {
+  rto: ['Aadhaar card / ID proof', 'Current driving licence or vehicle RC (if applicable)', 'Vehicle registration number (if applicable)', 'Registered mobile number', 'Address proof (if required)', 'Application-specific papers / NOC (if applicable)'],
+  aadhaar: ['Aadhaar number / Aadhaar card', 'Mobile number linked with Aadhaar (if available)', 'Supporting proof for the requested update (if required)', 'Appointment / acknowledgement slip (if already available)'],
+  pan: ['Aadhaar card / number', 'Mobile number', 'Date of birth proof (if required)', 'Address and email details', 'Existing PAN card (for correction, if applicable)'],
+  voter: ['Aadhaar / identity proof', 'Address proof', 'Recent photograph (if required)', 'Existing voter ID / EPIC number (if applicable)', 'Mobile number'],
+  passport: ['Aadhaar / identity proof', 'Address proof', 'Date of birth proof', 'Existing passport (for re-issue, if applicable)', 'Email and mobile number'],
+  certificate: ['Aadhaar / identity proof', 'Address proof', 'Relevant supporting proof (income / caste / residence / birth, as applicable)', 'Applicant / family details', 'Mobile number'],
+  land: ['Survey / block number or property details', 'Existing land record / 7-12 / 8-A (if available)', 'Aadhaar / identity proof', 'Village / taluka details', 'Mobile number'],
+  scheme: ['Aadhaar card', 'Bank passbook / account details (if applicable)', 'Relevant eligibility / category proof', 'Existing scheme / application number (if any)', 'Mobile number'],
+  tax: ['PAN card', 'Aadhaar card', 'Bank account details', 'Income / business details and supporting statements', 'Previous return / GST details (if applicable)'],
+  property: ['Aadhaar / identity proof', 'Property address and survey / plot details', 'Available title / ownership papers', 'Latest property tax / utility details (if available)', 'Contact details of parties involved'],
+  website: ['Business / brand name', 'Logo and business photos (if available)', 'Services and business description', 'Contact number, email and address', 'Preferred website examples / domain details (if available)'],
+  design: ['Business / event name', 'Text, offer or announcement to display', 'Logo / photo (if available)', 'Contact number and address to display', 'Preferred size / platform (Instagram, WhatsApp, print etc.)']
+};
+function getChecklistType(service) {
+  const s = service.toLowerCase();
+  if (s.includes('aadhaar')) return 'aadhaar';
+  if (s.includes('pan')) return 'pan';
+  if (s.includes('voter')) return 'voter';
+  if (s.includes('passport')) return 'passport';
+  if (s.includes('certificate')) return 'certificate';
+  if (s.includes('land record')) return 'land';
+  if (s.includes('pm-kisan') || s.includes('ayushman') || s.includes('labour') || s.includes('pension') || s.includes('awas') || s.includes('ujjwala')) return 'scheme';
+  if (s.includes('gst') || s.includes('income tax') || s.includes('udyam')) return 'tax';
+  if (s.includes('property') || s.includes('landlord') || s.includes('tenant')) return 'property';
+  if (s.includes('website')) return 'website';
+  if (s.includes('poster') || s.includes('banner') || s.includes('social media') || s.includes('visiting card') || s.includes('flyer')) return 'design';
+  if (s.includes('licence') || s.includes('license') || s.includes('vehicle') || s.includes('rc') || s.includes('noc') || s.includes('ownership') || s.includes('hypothecation')) return 'rto';
+  return 'documents';
+}
+function getTimeType(service, checklistType) {
+  if (checklistType === 'aadhaar') return 'aadhaar';
+  if (checklistType === 'rto') return 'rto';
+  if (checklistType === 'property') return 'property';
+  if (checklistType === 'website') return 'website';
+  if (checklistType === 'design') return 'design';
+  return 'documents';
+}
+function updateAssistant() {
+  const service = serviceSelect.value;
+  checklistRoot.innerHTML = '';
+  if (!service) { assistantInfo.hidden = true; return; }
+  const type = getChecklistType(service);
+  const time = assistantTimes[getTimeType(service, type)];
+  document.getElementById('assistant-time-value').textContent = time[0];
+  document.getElementById('assistant-note').textContent = time[1];
+  (checklists[type] || checklists.documents).forEach((item, i) => {
+    const label = document.createElement('label');
+    const input = document.createElement('input');
+    input.type = 'checkbox'; input.name = 'documents'; input.value = item; input.id = `doc-check-${i}`;
+    const span = document.createElement('span'); span.textContent = item;
+    label.append(input, span); checklistRoot.appendChild(label);
+  });
+  assistantInfo.hidden = false;
+}
+if (serviceSelect) serviceSelect.addEventListener('change', updateAssistant);
+
+// Enquiries open WhatsApp with the customer's selected service and checklist.
 const enquiryForm = document.getElementById('quick-enquiry-form');
 if (enquiryForm) {
   enquiryForm.addEventListener('submit', function (event) {
     event.preventDefault();
     const name = document.getElementById('enquiry-name').value.trim();
     const phone = document.getElementById('enquiry-phone').value.trim();
-    const service = document.getElementById('enquiry-service').value;
+    const service = serviceSelect.value;
     const message = document.getElementById('enquiry-message').value.trim();
-    if (!name || !phone || !service || !message) {
-      enquiryForm.reportValidity();
+    if (!name || !phone || !service) { enquiryForm.reportValidity(); return; }
+    const digits = phone.replace(/\D/g, '');
+    if (digits.length < 10 || digits.length > 13) {
+      document.getElementById('enquiry-phone').setCustomValidity('Please enter a valid phone number.');
+      document.getElementById('enquiry-phone').reportValidity();
+      document.getElementById('enquiry-phone').setCustomValidity('');
       return;
     }
-    const text = `Hello Krishna Enterprise & Services,%0A%0AQuick Enquiry:%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0AService: ${encodeURIComponent(service)}%0AMessage: ${encodeURIComponent(message)}`;
-    window.open(`https://wa.me/918733042025?text=${text}`, '_blank', 'noopener');
+    const checked = [...checklistRoot.querySelectorAll('input[type="checkbox"]:checked')].map(el => el.value);
+    const all = [...checklistRoot.querySelectorAll('input[type="checkbox"]')].map(el => el.value);
+    const missing = all.filter(item => !checked.includes(item));
+    const time = document.getElementById('assistant-time-value').textContent;
+    const lines = [
+      'Hello Krishna Enterprise & Services,', '', 'New Service Enquiry',
+      `Name: ${name}`, `Customer Phone: ${phone}`, `Service: ${service}`,
+      `Estimated KES assistance time: ${time}`,
+      '', 'Documents / information I have:', checked.length ? checked.map(x => `✓ ${x}`).join('\n') : 'Not selected yet',
+      '', 'Documents / information I may need help with:', missing.length ? missing.map(x => `• ${x}`).join('\n') : 'None marked missing',
+      message ? `\nAdditional details: ${message}` : '',
+      '', 'Please guide me about the next steps and applicable charges.'
+    ].filter(Boolean);
+    const url = `https://wa.me/918733042025?text=${encodeURIComponent(lines.join('\n'))}`;
+    window.open(url, '_blank', 'noopener');
   });
 }
